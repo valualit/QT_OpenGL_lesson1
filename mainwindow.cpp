@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget* parent) : QGLWidget(parent)
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(geese_coord()));
     timer->start(750);
+    setAutoBufferSwap(true);
 }
 
 void MainWindow::initializeGL()
@@ -38,7 +39,7 @@ void MainWindow::paintGL()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     qglColor(Qt::white);
-    renderText(10, 10 , 0, QString::fromUtf8("Вы набрали %1 очков:").arg(point), QFont() , 2000);
+    renderText(10, 10 , 0, QString::fromUtf8("Вы набрали %1 очков:").arg(point), QFont());
 
     geese(); // Рисуем объект
 
@@ -46,7 +47,6 @@ void MainWindow::paintGL()
 
     self_cursor(); // Загружаем наш курсор
 
-    swapBuffers();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *ke)
